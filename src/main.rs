@@ -28,6 +28,9 @@ use send_sync::run_send_sync;
 // async fn main() {
 //     run_send_sync();
 //
+// //    This will also work
+// //    get_website_info().await();
+// //    adding handler will help us to handle and await at other, we can add new more things
 //
 //    let handler = task::spawn(async {get_website_info().await});
 //
