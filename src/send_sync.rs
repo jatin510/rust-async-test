@@ -41,13 +41,15 @@ pub fn run_send_sync() {
 
     let car: Arc<dyn Vehicle> = Arc::new(Car::new());
 
-    let handles: Vec<_> = (0..10).map(|_| {
-        let car_shared = Arc::clone(&car);
+    let handles: Vec<_> = (0..10)
+        .map(|_| {
+            let car_shared = Arc::clone(&car);
 
-        thread::spawn(move || {
-            car_shared.start();
+            thread::spawn(move || {
+                car_shared.start();
+            })
         })
-    }).collect();
+        .collect();
 
     for handle in handles {
         handle.join().expect("failed");
