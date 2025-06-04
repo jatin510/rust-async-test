@@ -2,6 +2,7 @@
 use reqwest::Client;
 use std::time::Duration;
 use tokio::runtime::Runtime;
+use tokio::sync::mpsc;
 use tokio::task;
 use tokio::task::spawn;
 use tokio::time::sleep;
@@ -13,16 +14,14 @@ mod send_sync;
 use send_sync::run_send_sync;
 // use rust_pin::run_pin;
 
-fn main() {
+ fn main() {
     run_send_sync();
 
     let tokio_runtime = Runtime::new().unwrap();
-    // tokio_runtime.expect("hello").spawn_blocking(|_|{
-    //     get_website_info()
-    // });
 
     // on way is using block_on
     tokio_runtime.block_on(async { get_website_info().await });
+     println!("hello");
 }
 
 // #[tokio::main]
