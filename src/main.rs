@@ -14,21 +14,31 @@ use send_sync::run_send_sync;
 // use rust_pin::run_pin;
 
 // #[tokio::main]
-fn main() {
+// fn main() {
+//     run_send_sync();
+//
+//
+//     let tokio_runtime = Runtime::new();
+//     // tokio_runtime.expect("hello").spawn_blocking(|_|{
+//     //     get_website_info()
+//     // });
+//
+//     // on way is using block_on
+//     tokio_runtime.unwrap().block_on(async{
+//         get_website_info().await
+//     })
+// }
+
+
+#[tokio::main]
+async fn main() {
     run_send_sync();
 
 
-    let tokio_runtime = Runtime::new();
-    // tokio_runtime.expect("hello").spawn_blocking(|_|{
-    //     get_website_info()
-    // });
+   let handler = task::spawn(async {get_website_info().await});
 
-    // on way is using block_on
-    tokio_runtime.unwrap().block_on(async{
-        get_website_info().await
-    })
+    handler.await.unwrap();
 }
-
 
 async fn get_website_info() {
     let urls = vec!["https://google.com"; 10000];
