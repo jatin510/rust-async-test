@@ -2,21 +2,21 @@
 use reqwest::Client;
 use std::time::Duration;
 use tokio::runtime::Runtime;
-use tokio::sync::mpsc;
 use tokio::task;
-use tokio::task::spawn;
 use tokio::time::sleep;
 // use reqwest::
 
 mod rust_pin;
 mod send_sync;
+mod composite_pattern;
 
 use send_sync::run_send_sync;
+use composite_pattern::run_composite_pattern;
 // use rust_pin::run_pin;
 
  fn main() {
     run_send_sync();
-
+     run_composite_pattern();
     let tokio_runtime = Runtime::new().unwrap();
 
     // on way is using block_on
